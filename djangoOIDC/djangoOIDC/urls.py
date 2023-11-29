@@ -15,12 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
 from django.shortcuts import redirect
+from django.urls import path, include, re_path
 
 
 urlpatterns = [
     path('', lambda request: redirect('mpassidLogin:index')),
     path('admin/', admin.site.urls),
+    re_path(r'openid/', include('djangooidc.urls')),
     path("mpassidLogin/", include(("mpassidLogin.urls", "mpassidLogin"), namespace="mpassidLogin")),
 ]
